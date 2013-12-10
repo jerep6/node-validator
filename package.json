@@ -1,0 +1,14 @@
+{
+  "name": "request-validator",
+  "description": "",
+  "version": "0.0.1",
+  "scripts": {
+  },
+  "dependencies": {
+    "moment": "~2.4.0"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "should": "*"
+  }
+}
