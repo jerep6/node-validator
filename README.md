@@ -25,7 +25,9 @@ var toValidate = {
 };
 
 validator.run(test, toValidate, function(errorCount, errors) {
-  // will return errorCount=1, errors={"message":'Invalid value. Value must match required pattern.',"parameter":'children[0].prop',"value":'zxzx'}
+  // will return:
+  // errorCount=1
+  // errors=[{"message":'Invalid value. Value must match required pattern.',"parameter":'children[0].prop',"value":'zxzx'}]
 });
 ```
 ## Installation
