@@ -1,7 +1,14 @@
 {
   "name": "node-validator",
-  "description": "",
+  "description": "a simple, extensible object property validator for node.js",
   "version": "0.0.1",
+  "homepage" : "https://bitbucket.org/gregbacchus/node-validator/overview",
+  "repository" :
+  {
+    "type": "git",
+    "url": "git@bitbucket.org:gregbacchus/node-validator.git"
+  },
+  "main": "lib/validator.js",
   "scripts": {
   },
   "dependencies": {
