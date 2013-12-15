@@ -209,3 +209,30 @@ describe('custom Xor validator', function () {
     });
 });
 
+describe('readme example', function () {
+  it('should fail',
+    function (done) {
+
+      var child = validator.isObject()
+        .withRequired('prop', validator.isString({ regex: /[abc]+/ }));
+
+      var test = validator.isObject()
+        .withRequired('_id', validator.isString({ regex: /[abc]+/ }))
+        .withOptional('date', validator.isIsoDate())
+        .withOptional('children', validator.isArray(child, {min: 1}));
+
+      var toValidate = {
+        "_id": 'abababa',
+        "date": '2013-10-24',
+        "children": [{
+          "prop": 'zxzx'
+        }]
+      };
+
+      validator.run(test, toValidate, function(errorCount, errors) {
+        errorCount.should.equal(1);
+        done();
+      });
+    });
+});
+
