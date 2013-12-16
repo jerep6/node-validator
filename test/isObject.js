@@ -10,6 +10,7 @@ function expectFailure(message, childName, childValue) {
 function expectSuccess() {
   assert.fail();
 }
+
 describe('validator.isObject', function () {
   it('should pass an object',
     function (done) {
