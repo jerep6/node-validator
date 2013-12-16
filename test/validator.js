@@ -231,6 +231,10 @@ describe('readme example', function () {
 
       validator.run(test, toValidate, function(errorCount, errors) {
         errorCount.should.equal(1);
+        errors.should.have.length(1);
+        errors[0].message.should.equal('Invalid value. Value must match required pattern.');
+        errors[0].parameter.should.equal('children[0].prop');
+        errors[0].value.should.equal('zxzx');
         done();
       });
     });
