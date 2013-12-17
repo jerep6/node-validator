@@ -1,7 +1,7 @@
 {
   "name": "node-validator",
   "description": "a simple, extensible object property validator for node.js",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "homepage" : "https://bitbucket.org/gregbacchus/node-validator/overview",
   "repository" :
   {
