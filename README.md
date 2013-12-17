@@ -2,19 +2,19 @@
 
 _node-validator_ is a simple, extensible object property validator for node.js
 
-In the very near future it will include express.js middleware functionality for automatically validating request body content.
+It includes direct support for express.js, and can be used as express middleware to automatically validating request body content.
 
 ## Example
 ```javascript
 var validator = require('node-validator');
 
-var child = validator.isObject()
+var checkChild = validator.isObject()
   .withRequired('prop', validator.isString({ regex: /[abc]+/ }));
 
-var test = validator.isObject()
+var check = validator.isObject()
   .withRequired('_id', validator.isString({ regex: /[abc]+/ }))
   .withOptional('date', validator.isIsoDate())
-  .withOptional('children', validator.isArray(child, {min: 1}));
+  .withOptional('children', validator.isArray(checkChild, {min: 1}));
 
 var toValidate = {
   "_id": 'abababa',
@@ -24,12 +24,37 @@ var toValidate = {
   }]
 };
 
-validator.run(test, toValidate, function(errorCount, errors) {
+validator.run(check, toValidate, function(errorCount, errors) {
   // will return:
   // errorCount=1
   // errors=[{"message":'Invalid value. Value must match required pattern.',"parameter":'children[0].prop',"value":'zxzx'}]
 });
 ```
+
+Or using express.js
+
+```javascript
+app.post('/', [validator.express(check), function(req, res) {
+  // ...
+}
+```
+
+If the body content does not pass the given validation check, the validator will return.
+
+```
+400 Bad Request
+
+{
+    "errors": [
+        {
+            "parameter": "children[0].prop",
+            "value": zxzx,
+            "message": "Invalid value. Value must match required pattern."
+        }
+    ]
+}
+```
+
 ## Installation
 
     $ npm install node-validator
@@ -45,7 +70,7 @@ Used to validate that the item under test is an object, and to check it's proper
 Property requirements are chained to the `isObject` validator.
 
 ```javascript
-var test = validator.isObject()
+var check = validator.isObject()
   .withRequired('requiredProperty', propertyValidator1)
   .withOptional('optionalProperty', propertyValidator2);
 ```
@@ -59,7 +84,7 @@ The property validators may be any other validator, including `isObject`, or may
 Makes sure the item is of type string, also can check the value against a regular expression.
 
 ```javascript
-var test = validator.isString({regex: /[0-9A-Fa-f]+/});
+var check = validator.isString({regex: /[0-9A-Fa-f]+/});
 ```
 
 ### isNumber
@@ -67,7 +92,7 @@ var test = validator.isString({regex: /[0-9A-Fa-f]+/});
 Makes sure the item is a number, also can specify minimum and maximum values.
 
 ```javascript
-var test = validator.isNumber({min: 0, max: 78});
+var check = validator.isNumber({min: 0, max: 78});
 ```
 
 ### isDate
@@ -75,13 +100,13 @@ var test = validator.isNumber({min: 0, max: 78});
 Checks for a `Date` object or a string that is moment.js can parse.
 
 ```javascript
-var test = validator.isDate();
+var check = validator.isDate();
 ```
 
 Optionally, the moment.js format can be passed through to specify a particular format
 
 ```javascript
-var test = validator.isDate({format: 'LT'});
+var check = validator.isDate({format: 'LT'});
 ```
 
 ### isIsoDate
@@ -97,7 +122,7 @@ Makes sure that the item is of type `Object`, but doesn't validate any propertie
 Makes sure that the item is of type array, and validates the items. Also can specify minimum and maximum length of the array.
 
 ```javascript
-var test = validator.isArray(validator.isDate(), {min: 3});
+var check = validator.isArray(validator.isDate(), {min: 3});
 ```
 
 ## Your Own Validators

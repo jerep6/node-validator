@@ -213,13 +213,13 @@ describe('readme example', function () {
   it('should fail',
     function (done) {
 
-      var child = validator.isObject()
+      var checkChild = validator.isObject()
         .withRequired('prop', validator.isString({ regex: /[abc]+/ }));
 
-      var test = validator.isObject()
+      var check = validator.isObject()
         .withRequired('_id', validator.isString({ regex: /[abc]+/ }))
         .withOptional('date', validator.isIsoDate())
-        .withOptional('children', validator.isArray(child, {min: 1}));
+        .withOptional('children', validator.isArray(checkChild, {min: 1}));
 
       var toValidate = {
         "_id": 'abababa',
@@ -229,7 +229,7 @@ describe('readme example', function () {
         }]
       };
 
-      validator.run(test, toValidate, function(errorCount, errors) {
+      validator.run(check, toValidate, function(errorCount, errors) {
         errorCount.should.equal(1);
         errors.should.have.length(1);
         errors[0].message.should.equal('Invalid value. Value must match required pattern.');
