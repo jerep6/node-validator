@@ -48,7 +48,7 @@ If the body content does not pass the given validation check, the validator will
     "errors": [
         {
             "parameter": "children[0].prop",
-            "value": zxzx,
+            "value": "zxzx",
             "message": "Invalid value. Value must match required pattern."
         }
     ]
