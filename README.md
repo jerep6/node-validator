@@ -123,7 +123,7 @@ Example: to make sure that there can not be both properties `foo` and `bar`
 ```javascript
 function validateFooXorBar(value, onError) {
   if (value.foo !== undefined && value.bar !== undefined) {
-    onError('both foo and bar may not be defined', 'foo|bar', null)
+    onError('both foo and bar may not be defined', 'foo|bar', null);
   }
 }
 ```
