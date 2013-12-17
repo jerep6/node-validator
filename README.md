@@ -17,17 +17,17 @@ var check = validator.isObject()
   .withOptional('children', validator.isArray(checkChild, {min: 1}));
 
 var toValidate = {
-  "_id": 'abababa',
-  "date": '2013-10-24',
-  "children": [{
-    "prop": 'zxzx'
+  _id: 'abababa',
+  date: '2013-10-24',
+  children: [{
+    prop: 'zxzx'
   }]
 };
 
 validator.run(check, toValidate, function(errorCount, errors) {
   // will return:
   // errorCount=1
-  // errors=[{"message":'Invalid value. Value must match required pattern.',"parameter":'children[0].prop',"value":'zxzx'}]
+  // errors=[{"parameter":"children[0].prop","value":"zxzx","message":"Invalid value. Value must match required pattern."}]
 });
 ```
 
