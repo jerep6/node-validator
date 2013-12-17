@@ -34,6 +34,100 @@ validator.run(test, toValidate, function(errorCount, errors) {
 
     $ npm install node-validator
 
+## Included Validators
+
+Following are the build-in validators. You may also use your own, see section below.
+
+### isObject
+
+Used to validate that the item under test is an object, and to check it's properties. This is often the root validator.
+
+Property requirements are chained to the `isObject` validator.
+
+```javascript
+var test = validator.isObject()
+  .withRequired('requiredProperty', propertyValidator1)
+  .withOptional('optionalProperty', propertyValidator2);
+```
+
+If any properties are present in the object under test that are not listed, this will fail the validation.
+
+The property validators may be any other validator, including `isObject`, or may omitted to allow any value.
+
+### isString
+
+Makes sure the item is of type string, also can check the value against a regular expression.
+
+```javascript
+var test = validator.isString({regex: /[0-9A-Fa-f]+/});
+```
+
+### isNumber
+
+Makes sure the item is a number, also can specify minimum and maximum values.
+
+```javascript
+var test = validator.isNumber({min: 0, max: 78});
+```
+
+### isDate
+
+Checks for a `Date` object or a string that is moment.js can parse.
+
+```javascript
+var test = validator.isDate();
+```
+
+Optionally, the moment.js format can be passed through to specify a particular format
+
+```javascript
+var test = validator.isDate({format: 'LT'});
+```
+
+### isIsoDate
+
+A shortcut for `validator.isDate({format: 'YYYY-MM-DD'})`
+
+### isAnyObject
+
+Makes sure that the item is of type `Object`, but doesn't validate any properties.
+
+### isArray
+
+Makes sure that the item is of type array, and validates the items. Also can specify minimum and maximum length of the array.
+
+```javascript
+var test = validator.isArray(validator.isDate(), {min: 3});
+```
+
+## Your Own Validators
+
+You may use your own validators. All that is required is a function that meets the below requirements.
+
+```javascript
+function myValidator(value, onError) {
+  ...
+}
+```
+
+Where `value` is the item under test, and `onError` is a function to call with any validation errors. It has the signature:
+
+```javascript
+function onError(message,propertyName,propertyValue) {
+  ...
+}
+```
+
+Example: to make sure that there can not be both properties `foo` and `bar`
+
+```javascript
+function validateFooXorBar(value, onError) {
+  if (value.foo !== undefined && value.bar !== undefined) {
+    onError('both foo and bar may not be defined', 'foo|bar', null)
+  }
+}
+```
+
 ## License
 
 (The MIT License)
