@@ -1,5 +1,5 @@
-var should = require('should');
 var assert = require('assert');
+require('should');
 
 var validator = require('../lib/validator');
 
