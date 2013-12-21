@@ -95,6 +95,14 @@ Makes sure the item is a number, also can specify minimum and maximum values.
 var check = validator.isNumber({min: 0, max: 78});
 ```
 
+### isInteger
+
+Makes sure the item is a whole number (integer), also can specify minimum and maximum values.
+
+```javascript
+var check = validator.isInteger({min: 0, max: 78});
+```
+
 ### isDate
 
 Checks for a `Date` object or a string that is moment.js can parse.
