@@ -84,6 +84,10 @@ The property validators may be any other validator, including `isObject`, or may
 Makes sure the item is of type string, also can check the value against a regular expression.
 
 ```javascript
+var check = validator.isString();
+```
+or
+```javascript
 var check = validator.isString({regex: /[0-9A-Fa-f]+/});
 ```
 
@@ -92,6 +96,10 @@ var check = validator.isString({regex: /[0-9A-Fa-f]+/});
 Makes sure the item is a number, also can specify minimum and maximum values.
 
 ```javascript
+var check = validator.isNumber();
+```
+or
+```javascript
 var check = validator.isNumber({min: 0, max: 78});
 ```
 
@@ -99,6 +107,10 @@ var check = validator.isNumber({min: 0, max: 78});
 
 Makes sure the item is a whole number (integer), also can specify minimum and maximum values.
 
+```javascript
+var check = validator.isInteger();
+```
+or
 ```javascript
 var check = validator.isInteger({min: 0, max: 78});
 ```
@@ -113,6 +125,10 @@ var check = validator.isDate();
 
 Optionally, the moment.js format can be passed through to specify a particular format
 
+```javascript
+var check = validator.isDate();
+```
+or
 ```javascript
 var check = validator.isDate({format: 'LT'});
 ```
@@ -129,6 +145,10 @@ Makes sure that the item is of type `Object`, but doesn't validate any propertie
 
 Makes sure that the item is of type array, and validates the items. Also can specify minimum and maximum length of the array.
 
+```javascript
+var check = validator.isArray(validator.isDate());
+```
+or
 ```javascript
 var check = validator.isArray(validator.isDate(), {min: 3});
 ```
