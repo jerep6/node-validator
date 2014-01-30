@@ -209,15 +209,46 @@ describe('custom Xor validator', function () {
     });
 });
 
+describe('example1', function () {
+  it('should fail',
+    function (done) {
+
+      var checkChild = validator.isObject()
+        .withRequired('prop', validator.isString({ regex: /^[abc]+$/ }));
+
+      var check = validator.isObject()
+        .withRequired('_id', validator.isString({ regex: /^[abc]+$/ }))
+        .withOptional('date', validator.isIsoDate())
+        .withOptional('children', validator.isArray(checkChild, {min: 1}));
+
+      var toValidate = {
+        "_id": 'abababa',
+        "date": '2013-10-24',
+        "children": [{
+          "prop": ''
+        }]
+      };
+
+      validator.run(check, toValidate, function(errorCount, errors) {
+        errorCount.should.equal(1);
+        errors.should.have.length(1);
+        errors[0].message.should.equal('Invalid value. Value must match required pattern.');
+        errors[0].parameter.should.equal('children[0].prop');
+        errors[0].value.should.equal('');
+        done();
+      });
+    });
+});
+
 describe('readme example', function () {
   it('should fail',
     function (done) {
 
       var checkChild = validator.isObject()
-        .withRequired('prop', validator.isString({ regex: /[abc]+/ }));
+        .withRequired('prop', validator.isString({ regex: /^[abc]+$/ }));
 
       var check = validator.isObject()
-        .withRequired('_id', validator.isString({ regex: /[abc]+/ }))
+        .withRequired('_id', validator.isString({ regex: /^[abc]+$/ }))
         .withOptional('date', validator.isIsoDate())
         .withOptional('children', validator.isArray(checkChild, {min: 1}));
 

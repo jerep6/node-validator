@@ -9,10 +9,10 @@ It includes direct support for express.js, and can be used as express middleware
 var validator = require('node-validator');
 
 var checkChild = validator.isObject()
-  .withRequired('prop', validator.isString({ regex: /[abc]+/ }));
+  .withRequired('prop', validator.isString({ regex: /^[abc]+$/ }));
 
 var check = validator.isObject()
-  .withRequired('_id', validator.isString({ regex: /[abc]+/ }))
+  .withRequired('_id', validator.isString({ regex: /^[abc]+$/ }))
   .withOptional('date', validator.isIsoDate())
   .withOptional('children', validator.isArray(checkChild, {min: 1}));
 
