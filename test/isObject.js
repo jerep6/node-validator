@@ -39,6 +39,8 @@ describe('validator.isObject', function () {
       var v = validator.isObject()
         .withOptional('test');
       v.validate({test: 123}, expectSuccess);
+      v.validate({test: null}, expectSuccess);
+      v.validate({test: undefined}, expectSuccess);
       v.validate({}, expectSuccess);
       done();
     });
@@ -48,6 +50,8 @@ describe('validator.isObject', function () {
       var v = validator.isObject()
         .withRequired('test');
       v.validate({test: 123}, expectSuccess);
+      v.validate({test: null}, expectFailure);
+      v.validate({test: undefined}, expectFailure);
       v.validate({}, expectFailure);
       done();
     });
