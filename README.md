@@ -88,7 +88,7 @@ var check = validator.isString();
 ```
 or
 ```javascript
-var check = validator.isString({regex: /[0-9A-Fa-f]+/});
+var check = validator.isString({regex: /[0-9A-Fa-f]+/, message: 'Invalid value. Value must be hex.'});
 ```
 
 ### isNumber
