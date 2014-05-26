@@ -35,6 +35,13 @@ describe('validator.isDate', function () {
       done();
     });
 
+  it('should pass string dates with matching formats and fail valid dates with non-matching formats',
+    function (done) {
+      validator.isDate({format: 'YYYY-MM-DD'}).validate('2013-02-08', expectSuccess);
+      validator.isDate({format: 'YYYY-MM-DD'}).validate('2013-02-08T09:30:26', expectFailure);
+      done();
+    });
+
   it('should pass object',
     function (done) {
       validator.isDate().validate({year: 2014, month: 10, day: 14}, expectSuccess);
