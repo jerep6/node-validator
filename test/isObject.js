@@ -56,6 +56,17 @@ describe('validator.isObject', function () {
       done();
     });
 
+  it('should fail child property with string int when expecting int',
+    function (done) {
+      var v = validator.isObject()
+        .withOptional('test', validator.isInteger());
+      v.validate({test: 123}, expectSuccess);
+      v.validate({test: '123'}, expectFailure);
+      v.validate({test: undefined}, expectSuccess);
+      v.validate({}, expectSuccess);
+      done();
+    });
+
   it('should validate children',
     function (done) {
       // TODO: put stuff here

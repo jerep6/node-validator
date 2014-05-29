@@ -31,6 +31,7 @@ describe('validator.isInteger', function () {
 
   it('should fail non-numbers',
     function (done) {
+      validator.isInteger().validate('123', expectFailure);
       validator.isInteger().validate('asd', expectFailure);
       validator.isInteger().validate(null, expectFailure);
       validator.isInteger().validate(true, expectFailure);
