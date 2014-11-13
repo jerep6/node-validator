@@ -8,7 +8,7 @@ function expectFailure(message, childName, childValue) {
 }
 
 function expectSuccess() {
-  assert.fail();
+  throw new Error('fail');
 }
 
 describe('validator.isIsoDateTime', function () {
