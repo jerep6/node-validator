@@ -30,6 +30,11 @@ describe('validator.isIsoDateTime', function () {
       validator.isIsoDateTime().validate('2013-02-08T09:30:26Z', expectSuccess);
       validator.isIsoDateTime().validate('2013-02-08T09:30:26+0700', expectSuccess);
       validator.isIsoDateTime().validate('2013-02-08T09:30:26.123+0700', expectSuccess);
+
+      validator.isIsoDateTime().validate('2013-02-08 09:30:26.123Z', expectSuccess);
+      validator.isIsoDateTime().validate('2013-02-08 09:30:26Z', expectSuccess);
+      validator.isIsoDateTime().validate('2013-02-08 09:30:26+0700', expectSuccess);
+      validator.isIsoDateTime().validate('2013-02-08 09:30:26.123+0700', expectSuccess);
       done();
     });
 
