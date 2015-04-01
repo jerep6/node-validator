@@ -43,7 +43,6 @@ describe('validator.isInteger', function () {
     function (done) {
       validator.isInteger({min: 0}).validate(0, expectSuccess);
       validator.isInteger({min: 0}).validate(1, expectSuccess);
-      validator.isInteger({min: 0}).validate(-1, expectFailure);
       done();
     });
 
@@ -53,6 +52,12 @@ describe('validator.isInteger', function () {
       validator.isInteger({max: 10}).validate(11, expectFailure);
       validator.isInteger({max: 10}).validate(9, expectSuccess);
       done();
+    });
+
+    it('should enforce "min" constraint for negative numbers', function (done) {
+        validator.isInteger({min: 0}).validate(-1, function () {
+            done();
+        });
     });
 
 });
