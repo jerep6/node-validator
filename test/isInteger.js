@@ -51,6 +51,8 @@ describe('validator.isInteger', function () {
       validator.isInteger({max: 10}).validate(10, expectSuccess);
       validator.isInteger({max: 10}).validate(11, expectFailure);
       validator.isInteger({max: 10}).validate(9, expectSuccess);
+      validator.isInteger({max: 0}).validate(-2, expectSuccess);
+      validator.isInteger({max: 0}).validate(2, expectFailure);
       done();
     });
 
