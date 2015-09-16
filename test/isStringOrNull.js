@@ -64,9 +64,9 @@ describe('validator.isStringOrNull', function () {
     });
 
   it('should pass null',
-      function (done) {
-        validator.isStringOrNull().validate(null, expectSuccess);
-        done();
-      });
+    function (done) {
+      validator.isStringOrNull().validate(null, expectSuccess);
+      done();
+    });
 
 });
