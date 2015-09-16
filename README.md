@@ -79,6 +79,10 @@ If any properties are present in the object under test that are not listed, this
 
 The property validators may be any other validator, including `isObject`, or may omitted to allow any value.
 
+### isAnyObject
+
+Similar to `isObject`, however does not fail for unexpected properties.
+
 ### isString
 
 Makes sure the item is of type string, also can check the value against a regular expression.
@@ -148,10 +152,6 @@ var check = validator.isDate({format: 'LT'});
 ### isIsoDate
 
 A shortcut for `validator.isDate({format: 'YYYY-MM-DD'})`
-
-### isAnyObject
-
-Makes sure that the item is of type `Object`, but doesn't validate any properties.
 
 ### isArray
 
