@@ -91,6 +91,18 @@ or
 var check = validator.isString({regex: /[0-9A-Fa-f]+/, message: 'Invalid value. Value must be hex.'});
 ```
 
+### isStringOrNull
+
+Makes sure the item is of type string or equal to null, also can check the value against a regular expression.
+
+```javascript
+var check = validator.isStringOrNull();
+```
+or
+```javascript
+var check = validator.isArray(validator.isStringOrNull({regex: /[0-9A-Fa-f]+/, message: 'Invalid value. Value must be hex.'}));
+```
+
 ### isNumber
 
 Makes sure the item is a number, also can specify minimum and maximum values.
