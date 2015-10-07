@@ -1,8 +1,8 @@
 {
   "name": "node-validator",
   "description": "A simple, extensible object property validator for node.js. Supports express.js.",
-  "version": "0.1.15",
-  "homepage" : "https://bitbucket.org/gregbacchus/node-validator/overview",
+  "version": "0.1.16",
+  "homepage": "https://bitbucket.org/gregbacchus/node-validator/overview",
   "keywords": [
     "validator",
     "validation",
@@ -11,19 +11,19 @@
     "test",
     "request-validation"
   ],
-  "repository" :
-  {
+  "repository": {
     "type": "git",
     "url": "https://bitbucket.org/gregbacchus/node-validator.git"
   },
   "main": "lib/validator.js",
   "scripts": {
+    "test": "node --use-strict index.js"
   },
   "dependencies": {
-    "moment": "~2.4.0"
+    "moment": "~2.10.6"
   },
   "devDependencies": {
-    "mocha": "*",
+    "jasmine": "^2.3.2",
     "should": "*"
   }
 }
