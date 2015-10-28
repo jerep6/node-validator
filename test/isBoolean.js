@@ -13,14 +13,13 @@ function expectSuccess() {
 
 describe('validator.isBoolean', function () {
   it('should pass boolean',
-    function (done) {
+    function () {
       validator.isBoolean().validate(true, expectSuccess);
       validator.isBoolean().validate(false, expectSuccess);
-      done();
     });
 
   it('should fail non-booleans',
-    function (done) {
+    function () {
       validator.isBoolean().validate('asd', expectFailure);
       validator.isBoolean().validate(null, expectFailure);
       validator.isBoolean().validate(0, expectFailure);
@@ -29,7 +28,6 @@ describe('validator.isBoolean', function () {
       validator.isBoolean().validate({}, expectFailure);
       validator.isBoolean().validate([], expectFailure);
       validator.isBoolean().validate(function () {}, expectFailure);
-      done();
     });
 
 });

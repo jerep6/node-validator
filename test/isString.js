@@ -13,14 +13,13 @@ function expectSuccess() {
 
 describe('validator.isString', function () {
   it('should pass strings',
-    function (done) {
+    function () {
       validator.isString().validate('', expectSuccess);
       validator.isString().validate('asdfasdf', expectSuccess);
-      done();
     });
 
   it('should test regex options',
-    function (done) {
+    function () {
       validator.isString({regex: /^[abc]+$/}).validate('', expectFailure);
       validator.isString({regex: /^[\w\d\-_].*$/}).validate('', expectFailure);
       validator.isString({regex: /^[\w\d\-_].*$/}).validate('asd', expectSuccess);
@@ -30,7 +29,6 @@ describe('validator.isString', function () {
       validator.isString({regex: /^[abc]+$/}).validate('bca', expectSuccess);
       validator.isString({regex: /^[abc]+$/}).validate('d', expectFailure);
       validator.isString({regex: /^[abc]+$/}).validate('3', expectFailure);
-      done();
     });
 
   it('should test fail regex match of empty child element',
@@ -52,7 +50,7 @@ describe('validator.isString', function () {
     });
 
   it('should fail non-strings',
-    function (done) {
+    function () {
       validator.isString().validate(true, expectFailure);
       validator.isString().validate(null, expectFailure);
       validator.isString().validate(0, expectFailure);
@@ -61,7 +59,6 @@ describe('validator.isString', function () {
       validator.isString().validate({}, expectFailure);
       validator.isString().validate([], expectFailure);
       validator.isString().validate(function () {}, expectFailure);
-      done();
     });
 
 });

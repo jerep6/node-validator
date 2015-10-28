@@ -13,14 +13,13 @@ function expectSuccess() {
 
 describe('validator.isStringOrNull', function () {
   it('should pass strings',
-    function (done) {
+    function () {
       validator.isStringOrNull().validate('', expectSuccess);
       validator.isStringOrNull().validate('asdfasdf', expectSuccess);
-      done();
     });
 
   it('should test regex options',
-    function (done) {
+    function () {
       validator.isStringOrNull({regex: /^[abc]+$/}).validate('', expectFailure);
       validator.isStringOrNull({regex: /^[\w\d\-_].*$/}).validate('', expectFailure);
       validator.isStringOrNull({regex: /^[\w\d\-_].*$/}).validate('asd', expectSuccess);
@@ -30,7 +29,6 @@ describe('validator.isStringOrNull', function () {
       validator.isStringOrNull({regex: /^[abc]+$/}).validate('bca', expectSuccess);
       validator.isStringOrNull({regex: /^[abc]+$/}).validate('d', expectFailure);
       validator.isStringOrNull({regex: /^[abc]+$/}).validate('3', expectFailure);
-      done();
     });
 
   it('should test fail regex match of empty child element',

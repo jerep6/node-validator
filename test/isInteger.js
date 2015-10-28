@@ -13,48 +13,48 @@ function expectSuccess() {
 
 describe('validator.isInteger', function () {
   it('should pass an integer',
-    function (done) {
+    function () {
       validator.isInteger().validate(100, expectSuccess);
       validator.isInteger().validate(0, expectSuccess);
       validator.isInteger().validate(-100, expectSuccess);
-      done();
     });
 
+  it('should pass string if specified',
+      function () {
+        validator.isInteger({allowString: true}).validate('123', expectSuccess);
+      });
+
   it('should fail non-integer numbers',
-    function (done) {
+    function () {
       validator.isInteger().validate(123.4, expectFailure);
       validator.isInteger().validate(123.0, expectFailure);
       validator.isInteger().validate(0.0, expectFailure);
       validator.isInteger().validate(-123.4, expectFailure);
-      done();
     });
 
   it('should fail non-numbers',
-    function (done) {
+    function () {
       validator.isInteger().validate('', expectFailure);
       validator.isInteger().validate('123', expectFailure);
       validator.isInteger().validate('asd', expectFailure);
       validator.isInteger().validate(null, expectFailure);
       validator.isInteger().validate(true, expectFailure);
       validator.isInteger().validate(function () {}, expectFailure);
-      done();
     });
 
   it('should enforce "min" constraint',
-    function (done) {
+    function () {
       validator.isInteger({min: 0}).validate(0, expectSuccess);
       validator.isInteger({min: 0}).validate(1, expectSuccess);
-      done();
     });
 
   it('should enforce "max" constraint',
-    function (done) {
+    function () {
       validator.isInteger({max: 10}).validate(10, expectSuccess);
       validator.isInteger({max: 10}).validate(11, expectFailure);
       validator.isInteger({max: 10}).validate(9, expectSuccess);
       validator.isInteger({max: 0}).validate(-2, expectSuccess);
       validator.isInteger({max: 0}).validate(2, expectFailure);
-      done();
     });
 
     it('should enforce "min" constraint for negative numbers', function (done) {

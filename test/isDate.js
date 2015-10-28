@@ -13,42 +13,37 @@ function expectSuccess() {
 
 describe('validator.isDate', function () {
   it('should pass Date',
-    function (done) {
+    function () {
       validator.isDate().validate(new Date(), expectSuccess);
-      done();
     });
 
   it('should pass unix offset (milliseconds)',
-    function (done) {
+    function () {
       validator.isDate().validate(1318781876406, expectSuccess);
-      done();
     });
 
   it('should pass string dates',
-    function (done) {
+    function () {
       validator.isDate().validate('2013-02-08', expectSuccess);
       validator.isDate().validate('2013-02-08T09:30:26', expectSuccess);
       validator.isDate().validate('2013-02-08T09:30:26.123', expectSuccess);
       validator.isDate().validate('2013-02-08T09:30:26Z', expectSuccess);
       validator.isDate().validate('2013-02-08T09:30:26+0700', expectSuccess);
-      done();
     });
 
   it('should pass string dates with matching formats and fail valid dates with non-matching formats',
-    function (done) {
+    function () {
       validator.isDate({format: 'YYYY-MM-DD'}).validate('2013-02-08', expectSuccess);
       validator.isDate({format: 'YYYY-MM-DD'}).validate('2013-02-08T09:30:26', expectFailure);
-      done();
     });
 
   it('should fail invalid dates',
-    function (done) {
+    function () {
       validator.isDate().validate('asd', expectFailure);
       validator.isDate().validate(null, expectFailure);
       validator.isDate().validate({}, expectFailure);
       validator.isDate().validate([], expectFailure);
       validator.isDate().validate(function () {}, expectFailure);
-      done();
     });
 
 });
