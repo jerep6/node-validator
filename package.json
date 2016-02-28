@@ -1,7 +1,7 @@
 {
   "name": "node-validator",
   "description": "A simple, extensible object property validator for node.js. Supports express.js.",
-  "version": "0.1.21",
+  "version": "0.1.22",
   "homepage": "https://bitbucket.org/gregbacchus/node-validator/overview",
   "keywords": [
     "validator",
@@ -9,7 +9,9 @@
     "express",
     "check",
     "test",
-    "request-validation"
+    "request-validation",
+    "koa",
+    "koajs"
   ],
   "repository": {
     "type": "git",

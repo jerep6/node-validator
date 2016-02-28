@@ -4,6 +4,8 @@ _node-validator_ is a simple, extensible object property validator for node.js
 
 It includes direct support for express.js, and can be used as express middleware to automatically validating request body content.
 
+Now also supports koa.js as middleware.
+
 ## Example
 ```javascript
 var validator = require('node-validator');
@@ -37,6 +39,12 @@ Or using express.js
 app.post('/', [validator.express(check), function(req, res) {
   // ...
 }
+```
+
+Or using koa.js (use either `koaBody()`, `koaQuery` or `koaParams`)
+
+```javascript
+route.post('/', validator.koaBody(check), otherFunction);
 ```
 
 If the body content does not pass the given validation check, the validator will return.
