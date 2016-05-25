@@ -1,10 +1,11 @@
 var assert = require('assert');
-require('should');
+var should = require('should');
 
 var validator = require('../lib/validator');
 
 function expectFailure(message, childName, childValue) {
   message.should.not.be.empty;
+  return true;
 }
 
 function expectSuccess() {
@@ -19,11 +20,11 @@ describe('validator.isAnyObject', function () {
 
   it('should fail non-objects',
     function () {
-      validator.isAnyObject().validate('asd', expectFailure);
-      validator.isAnyObject().validate(null, expectFailure);
-      validator.isAnyObject().validate(123.4, expectFailure);
-      validator.isAnyObject().validate(true, expectFailure);
-      validator.isAnyObject().validate(function () {}, expectFailure);
+      should.exist(validator.isAnyObject().validate('asd', expectFailure));
+      should.exist(validator.isAnyObject().validate(null, expectFailure));
+      should.exist(validator.isAnyObject().validate(123.4, expectFailure));
+      should.exist(validator.isAnyObject().validate(true, expectFailure));
+      should.exist(validator.isAnyObject().validate(function () {}, expectFailure));
     });
 
   it('should pass with unexpected properties',
@@ -48,8 +49,8 @@ describe('validator.isAnyObject', function () {
       var v = validator.isAnyObject()
         .withRequired('test', validator.isNumber());
       v.validate({test: 123}, expectSuccess);
-      v.validate({test: null}, expectFailure);
-      v.validate({test: undefined}, expectFailure);
-      v.validate({}, expectFailure);
+      should.exist(v.validate({test: null}, expectFailure));
+      should.exist(v.validate({test: undefined}, expectFailure));
+      should.exist(v.validate({}, expectFailure));
     });
 });

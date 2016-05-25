@@ -1,10 +1,11 @@
 var assert = require('assert');
-require('should');
+var should = require('should');
 
 var validator = require('../lib/validator');
 
 function expectFailure(message, childName, childValue) {
   message.should.not.be.empty;
+  return true;
 }
 
 function expectSuccess() {
@@ -20,15 +21,15 @@ describe('validator.isString', function () {
 
   it('should test regex options',
     function () {
-      validator.isString({regex: /^[abc]+$/}).validate('', expectFailure);
-      validator.isString({regex: /^[\w\d\-_].*$/}).validate('', expectFailure);
+      should.exist(validator.isString({regex: /^[abc]+$/}).validate('', expectFailure));
+      should.exist(validator.isString({regex: /^[\w\d\-_].*$/}).validate('', expectFailure));
       validator.isString({regex: /^[\w\d\-_].*$/}).validate('asd', expectSuccess);
       validator.isString({regex: /^[abc]+$/}).validate('a', expectSuccess);
       validator.isString({regex: /^[abc]+$/}).validate('b', expectSuccess);
       validator.isString({regex: /^[abc]+$/}).validate('c', expectSuccess);
       validator.isString({regex: /^[abc]+$/}).validate('bca', expectSuccess);
-      validator.isString({regex: /^[abc]+$/}).validate('d', expectFailure);
-      validator.isString({regex: /^[abc]+$/}).validate('3', expectFailure);
+      should.exist(validator.isString({regex: /^[abc]+$/}).validate('d', expectFailure));
+      should.exist(validator.isString({regex: /^[abc]+$/}).validate('3', expectFailure));
     });
 
   it('should test fail regex match of empty child element',
@@ -37,7 +38,7 @@ describe('validator.isString', function () {
         .withRequired('test', validator.isString({regex: /^[abc]+$/}));
 
       var toValidate = {test:''};
-      check.validate(toValidate, expectFailure);
+      should.exist(check.validate(toValidate, expectFailure));
 
       validator.run(check, toValidate, function(errorCount, errors) {
         errorCount.should.equal(1);
@@ -51,14 +52,14 @@ describe('validator.isString', function () {
 
   it('should fail non-strings',
     function () {
-      validator.isString().validate(true, expectFailure);
-      validator.isString().validate(null, expectFailure);
-      validator.isString().validate(0, expectFailure);
-      validator.isString().validate(1, expectFailure);
-      validator.isString().validate(123.5, expectFailure);
-      validator.isString().validate({}, expectFailure);
-      validator.isString().validate([], expectFailure);
-      validator.isString().validate(function () {}, expectFailure);
+      should.exist(validator.isString().validate(true, expectFailure));
+      should.exist(validator.isString().validate(null, expectFailure));
+      should.exist(validator.isString().validate(0, expectFailure));
+      should.exist(validator.isString().validate(1, expectFailure));
+      should.exist(validator.isString().validate(123.5, expectFailure));
+      should.exist(validator.isString().validate({}, expectFailure));
+      should.exist(validator.isString().validate([], expectFailure));
+      should.exist(validator.isString().validate(function () {}, expectFailure));
     });
 
 });

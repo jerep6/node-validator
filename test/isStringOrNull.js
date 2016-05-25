@@ -1,10 +1,11 @@
 var assert = require('assert');
-require('should');
+var should = require('should');
 
 var validator = require('../lib/validator');
 
 function expectFailure(message, childName, childValue) {
   message.should.not.be.empty;
+  return true;
 }
 
 function expectSuccess() {
@@ -20,15 +21,15 @@ describe('validator.isStringOrNull', function () {
 
   it('should test regex options',
     function () {
-      validator.isStringOrNull({regex: /^[abc]+$/}).validate('', expectFailure);
-      validator.isStringOrNull({regex: /^[\w\d\-_].*$/}).validate('', expectFailure);
+      should.exist(validator.isStringOrNull({regex: /^[abc]+$/}).validate('', expectFailure));
+      should.exist(validator.isStringOrNull({regex: /^[\w\d\-_].*$/}).validate('', expectFailure));
       validator.isStringOrNull({regex: /^[\w\d\-_].*$/}).validate('asd', expectSuccess);
       validator.isStringOrNull({regex: /^[abc]+$/}).validate('a', expectSuccess);
       validator.isStringOrNull({regex: /^[abc]+$/}).validate('b', expectSuccess);
       validator.isStringOrNull({regex: /^[abc]+$/}).validate('c', expectSuccess);
       validator.isStringOrNull({regex: /^[abc]+$/}).validate('bca', expectSuccess);
-      validator.isStringOrNull({regex: /^[abc]+$/}).validate('d', expectFailure);
-      validator.isStringOrNull({regex: /^[abc]+$/}).validate('3', expectFailure);
+      should.exist(validator.isStringOrNull({regex: /^[abc]+$/}).validate('d', expectFailure));
+      should.exist(validator.isStringOrNull({regex: /^[abc]+$/}).validate('3', expectFailure));
     });
 
   it('should test fail regex match of empty child element',
@@ -36,8 +37,8 @@ describe('validator.isStringOrNull', function () {
       var check = validator.isObject()
         .withRequired('test', validator.isStringOrNull({regex: /^[abc]+$/}));
 
-      var toValidate = {test:''};
-      check.validate(toValidate, expectFailure);
+      var toValidate = {test: ''};
+      should.exist(check.validate(toValidate, expectFailure));
 
       validator.run(check, toValidate, function(errorCount, errors) {
         errorCount.should.equal(1);
@@ -51,13 +52,13 @@ describe('validator.isStringOrNull', function () {
 
   it('should fail non-strings',
     function (done) {
-      validator.isStringOrNull().validate(true, expectFailure);
-      validator.isStringOrNull().validate(0, expectFailure);
-      validator.isStringOrNull().validate(1, expectFailure);
-      validator.isStringOrNull().validate(123.5, expectFailure);
-      validator.isStringOrNull().validate({}, expectFailure);
-      validator.isStringOrNull().validate([], expectFailure);
-      validator.isStringOrNull().validate(function () {}, expectFailure);
+      should.exist(validator.isStringOrNull().validate(true, expectFailure));
+      should.exist(validator.isStringOrNull().validate(0, expectFailure));
+      should.exist(validator.isStringOrNull().validate(1, expectFailure));
+      should.exist(validator.isStringOrNull().validate(123.5, expectFailure));
+      should.exist(validator.isStringOrNull().validate({}, expectFailure));
+      should.exist(validator.isStringOrNull().validate([], expectFailure));
+      should.exist(validator.isStringOrNull().validate(function () {}, expectFailure));
       done();
     });
 

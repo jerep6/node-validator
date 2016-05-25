@@ -1,10 +1,11 @@
 var assert = require('assert');
-require('should');
+var should = require('should');
 
 var validator = require('../lib/validator');
 
 function expectFailure(message, childName, childValue) {
   message.should.not.be.empty;
+  return true;
 }
 
 function expectSuccess() {
@@ -19,16 +20,16 @@ describe('validator.isObject', function () {
 
   it('should fail non-objects',
     function () {
-      validator.isObject().validate('asd', expectFailure);
-      validator.isObject().validate(null, expectFailure);
-      validator.isObject().validate(123.4, expectFailure);
-      validator.isObject().validate(true, expectFailure);
-      validator.isObject().validate(function () {}, expectFailure);
+      should.exist(validator.isObject().validate('asd', expectFailure));
+      should.exist(validator.isObject().validate(null, expectFailure));
+      should.exist(validator.isObject().validate(123.4, expectFailure));
+      should.exist(validator.isObject().validate(true, expectFailure));
+      should.exist(validator.isObject().validate(function () {}, expectFailure));
     });
 
   it('should fail with unexpected properties',
     function () {
-      validator.isObject().validate({test: 123}, expectFailure);
+      should.exist(validator.isObject().validate({test: 123}, expectFailure));
     });
 
   it('should allow optional properties, but not require them',
@@ -46,9 +47,9 @@ describe('validator.isObject', function () {
       var v = validator.isObject()
         .withRequired('test');
       v.validate({test: 123}, expectSuccess);
-      v.validate({test: null}, expectFailure);
+      should.exist(v.validate({test: null}, expectFailure));
       v.validate({test: undefined}, expectFailure);
-      v.validate({}, expectFailure);
+      should.exist(v.validate({}, expectFailure));
     });
 
   it('should fail child property with string int when expecting int',
@@ -56,7 +57,7 @@ describe('validator.isObject', function () {
       var v = validator.isObject()
         .withOptional('test', validator.isInteger());
       v.validate({test: 123}, expectSuccess);
-      v.validate({test: '123'}, expectFailure);
+      should.exist(v.validate({test: '123'}, expectFailure));
       v.validate({test: undefined}, expectSuccess);
       v.validate({}, expectSuccess);
     });

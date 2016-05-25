@@ -1,10 +1,11 @@
 var assert = require('assert');
-require('should');
+var should = require('should');
 
 var validator = require('../lib/validator');
 
 function expectFailure(message, childName, childValue) {
   message.should.not.be.empty;
+  return true;
 }
 
 function expectSuccess() {
@@ -34,12 +35,12 @@ describe('validator.isNumber', function () {
 
   it('should fail non-numbers',
       function () {
-        validator.isNumber().validate('', expectFailure);
-        validator.isNumber().validate('123', expectFailure);
-        validator.isNumber().validate('asd', expectFailure);
-        validator.isNumber().validate(null, expectFailure);
-        validator.isNumber().validate(true, expectFailure);
-        validator.isNumber().validate(function () {}, expectFailure);
+        should.exist(validator.isNumber().validate('', expectFailure));
+        should.exist(validator.isNumber().validate('123', expectFailure));
+        should.exist(validator.isNumber().validate('asd', expectFailure));
+        should.exist(validator.isNumber().validate(null, expectFailure));
+        should.exist(validator.isNumber().validate(true, expectFailure));
+        should.exist(validator.isNumber().validate(function () {}, expectFailure));
       });
 
   it('should enforce "min" constraint',
@@ -51,14 +52,14 @@ describe('validator.isNumber', function () {
   it('should enforce "max" constraint',
       function () {
         validator.isNumber({max: 10}).validate(10, expectSuccess);
-        validator.isNumber({max: 10}).validate(11, expectFailure);
+        should.exist(validator.isNumber({max: 10}).validate(11, expectFailure));
         validator.isNumber({max: 10}).validate(9, expectSuccess);
         validator.isNumber({max: 0}).validate(-2, expectSuccess);
-        validator.isNumber({max: 0}).validate(2, expectFailure);
+        should.exist(validator.isNumber({max: 0}).validate(2, expectFailure));
       });
 
   it('should enforce "min" constraint for negative numbers', function () {
-    validator.isNumber({min: 0}).validate(-1, expectFailure);
+    should.exist(validator.isNumber({min: 0}).validate(-1, expectFailure));
   });
 
 });

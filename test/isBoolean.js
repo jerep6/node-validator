@@ -1,10 +1,11 @@
 var assert = require('assert');
-require('should');
+var should = require('should');
 
 var validator = require('../lib/validator');
 
 function expectFailure(message, childName, childValue) {
   message.should.not.be.empty;
+  return true;
 }
 
 function expectSuccess() {
@@ -20,14 +21,14 @@ describe('validator.isBoolean', function () {
 
   it('should fail non-booleans',
     function () {
-      validator.isBoolean().validate('asd', expectFailure);
-      validator.isBoolean().validate(null, expectFailure);
-      validator.isBoolean().validate(0, expectFailure);
-      validator.isBoolean().validate(1, expectFailure);
-      validator.isBoolean().validate(123.5, expectFailure);
-      validator.isBoolean().validate({}, expectFailure);
-      validator.isBoolean().validate([], expectFailure);
-      validator.isBoolean().validate(function () {}, expectFailure);
+      should.exist(validator.isBoolean().validate('asd', expectFailure));
+      should.exist(validator.isBoolean().validate(null, expectFailure));
+      should.exist(validator.isBoolean().validate(0, expectFailure));
+      should.exist(validator.isBoolean().validate(1, expectFailure));
+      should.exist(validator.isBoolean().validate(123.5, expectFailure));
+      should.exist(validator.isBoolean().validate({}, expectFailure));
+      should.exist(validator.isBoolean().validate([], expectFailure));
+      should.exist(validator.isBoolean().validate(function () {}, expectFailure));
     });
 
 });

@@ -1,10 +1,11 @@
 var assert = require('assert');
-require('should');
+var should = require('should');
 
 var validator = require('../lib/validator');
 
 function expectFailure(message, childName, childValue) {
   message.should.not.be.empty;
+  return true;
 }
 
 function expectSuccess() {
@@ -37,33 +38,33 @@ describe('validator.isIsoDateTime', function () {
 
   it('should fail ISO8601 string date/times with no time zone',
     function () {
-      validator.isIsoDateTime().validate('2013-02-08T09:30:26', expectFailure);
-      validator.isIsoDateTime().validate('2013-02-08T09:30:26.123', expectFailure);
+      should.exist(validator.isIsoDateTime().validate('2013-02-08T09:30:26', expectFailure));
+      should.exist(validator.isIsoDateTime().validate('2013-02-08T09:30:26.123', expectFailure));
     });
 
   it('should fail ISO8601 string date only',
     function () {
-      validator.isIsoDateTime().validate('2013-02-08', expectFailure);
+      should.exist(validator.isIsoDateTime().validate('2013-02-08', expectFailure));
     });
 
   it('should fail non-ISO8601 string date/times',
     function () {
-      validator.isIsoDateTime().validate('2013-W06-5T09:30:26', expectFailure);
-      validator.isIsoDateTime().validate('12/12/2012 12:12:12', expectFailure);
+      should.exist(validator.isIsoDateTime().validate('2013-W06-5T09:30:26', expectFailure));
+      should.exist(validator.isIsoDateTime().validate('12/12/2012 12:12:12', expectFailure));
     });
 
   it('should fail object',
     function () {
-      validator.isDate().validate({year: 2014, month: 10, day: 14}, expectFailure);
+      should.exist(validator.isDate().validate({year: 2014, month: 10, day: 14}, expectFailure));
     });
 
   it('should fail invalid dates',
     function () {
-      validator.isDate().validate('asd', expectFailure);
-      validator.isDate().validate(null, expectFailure);
-      validator.isDate().validate({}, expectFailure);
-      validator.isDate().validate([], expectFailure);
-      validator.isDate().validate(function () {}, expectFailure);
+      should.exist(validator.isDate().validate('asd', expectFailure));
+      should.exist(validator.isDate().validate(null, expectFailure));
+      should.exist(validator.isDate().validate({}, expectFailure));
+      should.exist(validator.isDate().validate([], expectFailure));
+      should.exist(validator.isDate().validate(function () {}, expectFailure));
     });
 
 });
